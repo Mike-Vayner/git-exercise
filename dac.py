@@ -22,15 +22,15 @@ class DAC:
         To print this number in a binary format, use the `0=10b` format
         in an f-string or `str.format()`."""
 
-        return round(self.analog * (2**self.digits / self.max_voltage))
+        return round(self.analog * (2**self.digits - 1 / self.max_voltage))
 
     @digital.setter
     def digital(self, value: int) -> None:
         if value > 0b1111111111:
             raise ValueError(
-                f"voltage must be between 0 and 0x{2 ** self.digits:0=10b} (is {value:0=10b})"
+                f"voltage must be between 0 and 0x{2**self.digits - 1:0=10b} (is {value:0=10b})"
             )
-        self.analog = value / (2**self.digits / self.max_voltage)
+        self.analog = value / (2**self.digits - 1 / self.max_voltage)
 
 
 def create_dac(voltage: float, max_voltage: float = 5, digits: int = 10) -> DAC:
