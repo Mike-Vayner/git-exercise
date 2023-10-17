@@ -20,7 +20,7 @@ class DAC:
         To print this number in a binary format, use the `0=10b` format
         in an f-string or `str.format()`."""
 
-        return round(self.analog * 204.8)
+        return round(self.analog * 204.6)
 
     @digital.setter
     def digital(self, value: int) -> None:
@@ -28,7 +28,7 @@ class DAC:
             raise ValueError(
                 f"voltage must be between 0 and 0x1111111111 (is {value:0=10b})"
             )
-        self.analog = value / 204.8
+        self.analog = value / 204.6
 
 
 def create_dac(voltage: float) -> DAC:
